@@ -1,0 +1,870 @@
+PROJECT: ResolveAI — Production-Quality AI Customer Support Platform
+1. Your Role
+
+Act as a senior full-stack engineer, SaaS product designer, UX architect, database engineer, and AI application developer.
+
+Build a complete, professional, responsive web application named ResolveAI.
+
+Do not create just a landing page, static dashboard, or chatbot mockup. Build an interactive application with connected pages, working forms, functional navigation, meaningful state changes, data persistence, validation, loading states, error handling, and real AI integration.
+
+The application must be suitable for a professional portfolio demonstration and designed so that it can be developed further into a real SaaS product.
+
+Make sensible product decisions independently. Prioritize working functionality, consistency, usability, and maintainable architecture over unnecessary visual effects.
+
+2. Product Overview
+
+ResolveAI is an AI-assisted customer support and issue management platform for small businesses, e-commerce companies, educational institutions, and service providers.
+
+The problem it solves:
+
+Businesses receive complaints and requests through multiple channels. Their support teams struggle to prioritize urgent issues, respond consistently, track ownership, and understand recurring problems.
+
+ResolveAI provides a centralized workspace where customers submit issues, AI analyzes them, support agents resolve tickets, and administrators monitor service quality.
+
+Core value proposition
+Reduce repetitive support work.
+Identify urgent customer problems quickly.
+Help agents draft accurate and helpful responses.
+Maintain a searchable organizational knowledge base.
+Track ticket ownership and resolution progress.
+Improve accountability with analytics and audit history.
+
+The application must assist human support agents rather than silently making consequential customer-service decisions.
+
+3. Technology Stack
+
+Use the following stack where supported by the Google AI Studio environment:
+
+Frontend: React with TypeScript.
+Build tool: Vite, or the framework already configured by the environment.
+Styling: Tailwind CSS with reusable design tokens.
+Components: Accessible, reusable UI components.
+Icons: Lucide React.
+Charts: Recharts.
+Routing: React Router or the framework's native routing.
+AI: Google Gemini API through the supported Google GenAI SDK.
+Backend: A secure server-side API layer.
+Database and authentication: Firebase Authentication and Cloud Firestore when available and configured.
+Testing: Vitest and React Testing Library where supported.
+
+Use the currently supported Gemini model available to the project. Do not hardcode an outdated model identifier.
+
+If Firebase or another external service requires credentials that have not been supplied, implement a clean integration layer, explain the required configuration, and provide a working local demonstration mode.
+
+Never expose private API keys in client-side code.
+
+Do not invent successful connections to external services. Clearly distinguish working integrations from simulated functionality.
+
+4. Design Direction
+
+Create a premium, modern B2B SaaS interface inspired by the usability of well-designed customer service and project management products.
+
+Visual identity
+Product name: ResolveAI.
+Primary color: Deep indigo/navy.
+Accent: Refined violet or blue.
+Background: Soft neutral gray or off-white.
+Cards: White with subtle borders.
+Typography: Inter or a comparable clean sans-serif.
+Icons: Consistent Lucide outline icons.
+Corner radius: Consistent, moderately rounded.
+Shadows: Subtle and restrained.
+Charts: Clear, accessible, consistent color palette.
+
+Avoid excessive gradients, oversized headings inside the application, glassmorphism, distracting animations, emoji-based navigation, and generic AI-generated landing page aesthetics.
+
+The product should feel credible, focused, enterprise-ready, and easy to use.
+
+Application shell
+
+Build a persistent desktop sidebar with:
+
+Overview
+Tickets
+AI Assistant
+Knowledge Base
+Customers
+Team
+Analytics
+Automation Rules
+Activity Log
+Settings
+
+At the top, show the ResolveAI logo, organization switcher, and a workspace indicator.
+
+In the main header, include:
+
+Breadcrumbs or page title.
+Global search.
+Quick-create ticket action.
+Notification center.
+User avatar and account menu.
+
+On mobile, collapse the sidebar into an accessible drawer and adapt tables into readable responsive layouts.
+
+Every navigation item must lead to a functional page. Do not leave dead links or empty placeholder pages.
+
+5. Authentication and Onboarding
+
+Create professional authentication screens:
+
+Sign in.
+Create account.
+Forgot password.
+Password reset state.
+Sign out.
+
+Support Firebase Authentication when configured.
+
+Include a demo sign-in option for local demonstrations. Demo access must be clearly identified and must not be presented as secure production authentication.
+
+After first sign-in, show an onboarding flow:
+
+Enter organization name.
+Choose organization type.
+Configure support categories.
+Add initial team members or skip.
+Import or create knowledge-base articles.
+Open the dashboard.
+
+Allow users to revisit organization settings later.
+
+Validate required fields, show useful errors, prevent duplicate submissions, and provide clear loading states.
+
+6. Dashboard
+
+Create a fully designed overview page.
+
+KPI cards
+
+Display:
+
+Total open tickets.
+New tickets today.
+Urgent tickets.
+Average first-response time.
+Average resolution time.
+Customer satisfaction score.
+
+Each metric should include a clear label, value, and meaningful trend or comparison when sufficient historical data exists.
+
+Never fabricate a historical trend from a single snapshot. When historical data is unavailable, display an appropriate empty or unavailable state.
+
+Charts
+
+Include:
+
+Ticket volume over time.
+Tickets by status.
+Tickets by priority.
+Ticket categories.
+Resolution-time trends.
+Customer satisfaction trends, when feedback data exists.
+
+Add date-range filters such as 7 days, 30 days, and 90 days.
+
+Charts must update from the selected period and actual available dataset.
+
+Dashboard sections
+Recently updated tickets.
+Unassigned tickets.
+Urgent issues.
+Team workload.
+Recent activity.
+AI-generated operational insights.
+
+AI insights must be grounded in actual ticket data. Include a short explanation or supporting counts for each insight. If there is insufficient data, explain that instead of inventing a finding.
+
+7. Ticket Management System
+
+This is the central feature of ResolveAI.
+
+Ticket creation
+
+Allow customers or authorized staff to create tickets with:
+
+Subject.
+Detailed description.
+Customer name and contact details.
+Category.
+Priority.
+Channel.
+Optional order or reference ID.
+Optional attachments, when secure file storage is configured.
+
+Support channels such as email, web form, phone, and chat as ticket metadata. Do not imply that real external channel integrations exist until implemented.
+
+Automatically generate a unique human-readable ticket reference.
+
+Ticket statuses
+
+Support:
+
+New.
+Open.
+In Progress.
+Waiting for Customer.
+Resolved.
+Closed.
+
+Define and validate permitted status transitions. Reopening a resolved or closed ticket should be an explicit action with an activity record.
+
+Priority levels
+
+Support:
+
+Low.
+Normal.
+High.
+Urgent.
+
+AI may recommend priority, but authorized staff must be able to override it.
+
+Ticket list
+
+Build a polished, responsive ticket management table with:
+
+Ticket reference.
+Subject.
+Customer.
+Category.
+Priority.
+Status.
+Assigned agent.
+Created date.
+Last updated date.
+
+Features:
+
+Search by ticket reference, subject, and customer.
+Filter by status, priority, category, assignee, and date.
+Sort by relevant columns.
+Pagination.
+Saved filter presets if feasible.
+Bulk assignment and status updates with confirmation.
+Clear active-filter indicators.
+Empty, loading, and error states.
+
+Use real application state and database queries. Do not make filter controls decorative.
+
+Ticket detail page
+
+Display:
+
+Ticket summary.
+Customer information.
+Priority and status controls.
+Assigned agent.
+Original complaint.
+Conversation timeline.
+Internal notes.
+Customer-facing replies.
+AI analysis.
+Suggested response.
+Related knowledge-base articles.
+Activity history.
+
+Allow authorized agents to:
+
+Assign or reassign tickets.
+Change priority and status.
+Add internal notes.
+Draft and edit replies.
+Send a reply through an implemented channel or save it as a draft.
+Resolve and reopen tickets.
+View related customer tickets.
+
+Clearly distinguish internal notes from customer-facing messages.
+
+Do not show an internal note in a customer-facing response.
+
+Record significant changes with actor, timestamp, and relevant event details.
+
+8. Gemini AI Assistant
+
+Implement a real AI assistant using the supported Gemini API.
+
+Create an AI service layer separate from the user interface.
+
+Feature A: Automatic ticket analysis
+
+When a ticket is created or an agent requests analysis, send the relevant ticket content to Gemini.
+
+Ask the model to return structured JSON containing:
+
+Category.
+Sentiment.
+Recommended priority.
+Short summary.
+Detected customer intent.
+Suggested next action.
+Confidence indicator.
+Potential urgency signals.
+
+Use a strict schema where supported, validate the returned data, and handle malformed or incomplete responses safely.
+
+Use a controlled set of categories, such as:
+
+Billing.
+Order and Delivery.
+Returns and Refunds.
+Technical Support.
+Account Access.
+Product Inquiry.
+General Inquiry.
+Other.
+
+Treat the output as a recommendation rather than an authoritative decision.
+
+The AI must not invent facts about a customer's order, refund eligibility, account, or previous interactions.
+
+Feature B: AI reply generator
+
+Add a button labeled "Generate Reply".
+
+The agent can choose a tone:
+
+Professional.
+Friendly.
+Concise.
+Empathetic.
+
+The assistant should produce a relevant draft using the ticket context and approved knowledge-base information.
+
+Allow agents to:
+
+Generate a draft.
+Regenerate a draft.
+Edit the generated text.
+Copy the response.
+Save as draft.
+Send only after an explicit human action through a configured delivery integration.
+
+Never automatically send AI-generated replies without explicit authorization and an implemented, tested delivery workflow.
+
+Feature C: Grounded knowledge assistant
+
+Build a knowledge assistant that answers questions using published organization knowledge-base articles.
+
+For the initial implementation, retrieve relevant articles through a simple search mechanism, such as normalized keyword search. Design the retrieval layer so that it can later support embeddings and vector search.
+
+Provide Gemini only with relevant authorized article content and the user's question.
+
+Require answers to be grounded in retrieved content.
+
+Display:
+
+Answer.
+Source article titles.
+Relevant article links or identifiers.
+A clear indication when the knowledge base does not contain sufficient information.
+
+When information is missing, the assistant must say it cannot find a supported answer and recommend escalation to a human agent.
+
+Do not fabricate citations or claim that an article supports a statement when it does not.
+
+Feature D: Conversation summarization
+
+Generate a concise summary of long ticket conversations, including:
+
+Customer's main issue.
+Steps already attempted.
+Important facts.
+Outstanding questions.
+Recommended next step.
+
+Summaries must be based on actual conversation content.
+
+Feature E: Similar ticket detection
+
+Identify potentially related tickets using text similarity or keyword matching in the initial version.
+
+Show the ticket reference, subject, status, and a short reason for the match.
+
+Do not claim semantic similarity or advanced machine learning when using only simple keyword matching.
+
+AI interface
+
+Create a dedicated AI Assistant page with:
+
+Conversational interface.
+Suggested prompts.
+Context selection.
+Response loading state.
+Source references.
+Copy controls.
+Error recovery.
+Clear conversation action.
+Optional ticket-context mode.
+
+Keep ticket-specific and organization-wide questions within the user's access permissions.
+
+Add reasonable request limits, input length limits, and safe handling of untrusted customer-provided text.
+
+9. Knowledge Base
+
+Build a complete article management system.
+
+Knowledge base list
+
+Display:
+
+Article title.
+Category.
+Status.
+Author.
+Last updated date.
+
+Support search, filtering, sorting, and pagination.
+
+Article editor
+
+Support:
+
+Title.
+Summary.
+Article body.
+Category.
+Tags.
+Draft or published status.
+Author.
+Created and updated timestamps.
+
+Include a usable Markdown editor or a simple rich-text editor.
+
+Provide preview, save draft, publish, edit, and archive actions.
+
+Only published articles should be used as authoritative content for customer-support AI answers.
+
+Restrict editing and publishing to authorized roles.
+
+Provide seed articles for a fictional demonstration organization, including refund policies, shipping FAQs, account troubleshooting, and billing guidance. Clearly label this content as sample company information.
+
+10. Customer Management
+
+Create a customer directory with:
+
+Name.
+Email.
+Optional phone.
+Company, when applicable.
+Customer since date.
+Total tickets.
+Open tickets.
+Most recent interaction.
+
+Include search, filtering, and sorting.
+
+The customer profile should contain:
+
+Contact information.
+Ticket history.
+Interaction timeline.
+Customer-provided notes, when authorized.
+Basic ticket-resolution statistics.
+
+Use stable customer identifiers and prevent accidental duplicate records where possible.
+
+Do not expose sensitive customer information to unauthorized users.
+
+Do not invent real customer identities or claim sample records are real.
+
+11. Team Management and Permissions
+
+Implement role-based access control.
+
+Roles
+
+Administrator:
+
+Manage organization settings.
+Manage users and roles.
+Access organization analytics.
+Manage knowledge-base publishing.
+Configure automation rules.
+
+Support Manager:
+
+View team tickets.
+Assign tickets.
+Manage team workload.
+Access support analytics.
+Review AI suggestions and operational insights.
+
+Support Agent:
+
+View permitted tickets.
+Update assigned tickets.
+Add notes and replies.
+Use AI assistance.
+Access permitted customer information.
+
+Customer:
+
+Submit tickets.
+View only their own tickets.
+View permitted customer-facing replies.
+Reply to their own tickets.
+Check ticket status.
+
+Protect permissions in backend operations and database security rules. Hiding a frontend button is not sufficient authorization.
+
+Provide an administrator-managed team directory with role, status, workload, and invitation state.
+
+Do not implement insecure role switching as a production authentication mechanism.
+
+12. Automation Rules
+
+Build a functional rule management page.
+
+Allow authorized users to create, edit, enable, disable, and delete simple rules.
+
+Each rule contains:
+
+Name.
+Trigger.
+Conditions.
+Action.
+Enabled state.
+
+Supported triggers:
+
+Ticket created.
+Priority changed.
+Status changed.
+Ticket assigned.
+
+Supported conditions:
+
+Category matches.
+Priority matches.
+Status matches.
+Ticket is unassigned.
+
+Supported actions:
+
+Set priority.
+Assign an eligible agent.
+Add a predefined internal tag.
+Change status where permitted.
+
+Evaluate rules through a centralized service when the corresponding event occurs.
+
+Prevent infinite loops, duplicate event processing, unauthorized assignments, and invalid status transitions.
+
+Record rule executions and failures in the activity log.
+
+Do not present scheduled jobs, email delivery, or external integrations as operational unless their backend services are implemented.
+
+13. Analytics and Reporting
+
+Create an analytics workspace with date-range filters and role-appropriate access.
+
+Include:
+
+Ticket creation volume.
+Tickets resolved.
+Open backlog.
+First-response time.
+Resolution time.
+Ticket volume by category.
+Ticket volume by priority.
+Agent workload.
+Customer satisfaction when collected.
+Reopened ticket rate.
+
+Define metric calculations consistently and document them.
+
+For example, calculate resolution time from ticket creation to its first qualifying resolution event, unless a different explicitly documented definition is selected.
+
+Use appropriate aggregation and timezone handling.
+
+Add CSV export for authorized users.
+
+Export only data the current user is permitted to access.
+
+Show empty states when no suitable data exists.
+
+14. Notifications and Activity Log
+
+Implement an in-app notification center.
+
+Examples:
+
+A ticket was assigned to you.
+A ticket you manage was updated.
+A customer replied.
+An urgent ticket was created.
+An automation rule failed.
+
+Support unread counts, marking individual notifications as read, and marking all as read.
+
+Create an activity log for important actions:
+
+Ticket created.
+Status changed.
+Priority changed.
+Assignment changed.
+Internal note added.
+Customer-facing reply recorded.
+Knowledge article published.
+Automation rule executed.
+
+Store timestamps and actor information.
+
+Keep internal operational events separate from customer-facing conversation history.
+
+For a production system, enforce append-only audit behavior through trusted backend operations and appropriate access controls.
+
+15. Settings
+
+Build settings pages for:
+
+Organization
+Organization name.
+Organization type.
+Timezone.
+Default ticket priority.
+Support categories.
+Profile
+Display name.
+Profile preferences.
+Notification preferences.
+AI configuration
+Enable or disable supported AI features.
+Default reply tone.
+AI assistance disclosure settings.
+Request limits where configurable.
+Security
+Authentication settings.
+Session and access controls supported by the chosen provider.
+Role and permission management.
+Data management
+Export authorized organization data.
+Display integration status.
+Provide appropriate deletion workflows and confirmation.
+
+Never expose secret API credentials in browser-accessible settings.
+
+16. Data Architecture
+
+Use a clean, maintainable data model.
+
+Create suitable collections or database tables for:
+
+organizations
+users
+customers
+tickets
+ticketMessages
+ticketEvents
+knowledgeArticles
+notifications
+automationRules
+automationExecutions
+aiAnalyses
+auditEvents
+
+Include organization identifiers on tenant-owned records.
+
+Use stable identifiers, server-generated timestamps where appropriate, validated references, and explicit ownership relationships.
+
+Every organization-scoped query and mutation must enforce tenant isolation.
+
+Do not trust organization IDs, user IDs, roles, or permissions supplied by the browser without server-side verification.
+
+Use database indexes for common ticket filters and sort operations.
+
+Avoid storing duplicate sensitive information unnecessarily.
+
+Implement a repository or service layer so the UI does not directly depend on database implementation details.
+
+17. Secure AI and Backend Integration
+
+All calls requiring secret Gemini credentials must run through a secure server-side layer or an officially supported secure execution environment.
+
+Use environment variables or the platform's supported secret management.
+
+Provide a sample environment configuration containing placeholder values only.
+
+Never commit real secrets.
+
+Implement:
+
+Input validation.
+Request size limits.
+Authentication checks.
+Authorization checks.
+Rate limiting where supported.
+Graceful AI timeouts and error handling.
+Schema validation for structured AI output.
+Safe rendering of customer-supplied content.
+Appropriate logging without unnecessary sensitive data.
+Clear separation of development and production configurations.
+
+Treat ticket descriptions, uploaded content, and knowledge articles as untrusted data. Do not allow embedded instructions in customer content to override system rules, expose secrets, or access unrelated records.
+
+Do not send unrelated customer records to Gemini when analyzing a single ticket.
+
+Use only the minimum authorized context needed for a request.
+
+Do not assume AI-generated output is factually correct or safe without validation.
+
+18. Data Persistence and Demo Mode
+
+The app must have a usable first-run experience.
+
+When external credentials are not available, implement a clearly labeled local demo mode with realistic fictional data.
+
+Seed the application with:
+
+At least 20 fictional support tickets.
+Several customers.
+Four or more fictional agents.
+Multiple ticket statuses and priorities.
+Eight or more knowledge-base articles.
+Sample activity events.
+Sample notifications.
+Useful dashboard chart data.
+
+Make demo data internally consistent so ticket counts, charts, assignments, and analytics agree.
+
+Persist changes in the configured database in connected mode.
+
+In local demo mode, use a suitable local persistence adapter so changes survive ordinary page refreshes where feasible.
+
+Clearly separate demo data from production organization data.
+
+Provide a reset-demo-data action with confirmation.
+
+If Gemini credentials are missing, the core ticketing workflow must still work. AI controls should explain that configuration is required or provide clearly labeled deterministic demo responses. Never silently represent mock AI output as a real Gemini response.
+
+19. Frontend Quality Requirements
+
+Implement:
+
+Reusable buttons, inputs, dropdowns, modals, badges, cards, tables, tabs, and tooltips.
+Accessible form labels.
+Keyboard navigation.
+Visible focus states.
+Proper contrast.
+Responsive layouts.
+Toast notifications.
+Confirmation dialogs for destructive actions.
+Field-level validation.
+Skeleton loading states.
+Error states with retry options.
+Helpful empty states.
+Consistent date, time, and number formatting.
+Search debounce where appropriate.
+Optimistic updates only when failures can be handled safely.
+URL-aware navigation and useful page titles.
+
+Avoid full-page reloads for ordinary interactions.
+
+Use sensible component boundaries and avoid placing the entire application in one enormous component.
+
+Keep business logic, AI integration, persistence, and UI components separate.
+
+Do not use fake buttons, dead navigation links, static controls that imply functionality, or placeholder text in essential workflows.
+
+20. Required Application Routes
+
+Implement equivalent routes using the chosen router:
+
+/login
+/signup
+/forgot-password
+/onboarding
+/dashboard
+/tickets
+/tickets/new
+/tickets/:ticketId
+/ai-assistant
+/knowledge-base
+/knowledge-base/:articleId
+/customers
+/customers/:customerId
+/team
+/analytics
+/automation
+/activity
+/settings
+
+Protect authenticated routes and apply the relevant role permissions.
+
+Handle invalid routes and missing ticket or customer identifiers with clear error pages.
+
+Ensure direct navigation to supported URLs works.
+
+21. Testing and Acceptance Criteria
+
+Before declaring the application complete, verify the following:
+
+The application builds and starts without unresolved imports or compilation errors.
+Navigation works across all primary sections.
+Responsive layouts work on desktop, tablet, and mobile widths.
+Ticket creation validates input and generates a unique reference.
+Ticket search, filters, sorting, and pagination work together.
+Ticket status changes persist.
+Assignment changes update the relevant ticket and workload views.
+Internal notes never appear as customer-facing replies.
+AI analysis validates structured responses and handles failures.
+Reply generation produces editable drafts and never sends automatically.
+Knowledge-base answers display genuine retrieved source articles.
+Role restrictions are enforced beyond the frontend.
+Organization data is isolated between tenants.
+Dashboard metrics match the underlying dataset.
+Notifications and activity history update when relevant events occur.
+Automation rules execute only when their conditions are met.
+CSV export respects access permissions.
+Demo mode remains usable without external API credentials.
+Empty, loading, success, and error states are implemented.
+No secret credentials are present in client bundles or source control.
+
+Write focused tests for the highest-risk business logic, particularly permissions, tenant isolation, ticket transitions, automation execution, and AI response validation.
+
+22. Implementation Strategy
+
+Work in the following order:
+
+Phase 1: Establish the application shell, design system, routing, and responsive navigation.
+
+Phase 2: Implement the data model, persistence adapter, authentication integration, and demo mode.
+
+Phase 3: Complete ticket creation, listing, filtering, assignment, detail views, notes, and status transitions.
+
+Phase 4: Implement dashboard metrics, customer profiles, knowledge-base management, and analytics.
+
+Phase 5: Integrate Gemini-powered ticket analysis, response drafting, conversation summaries, and grounded knowledge assistance.
+
+Phase 6: Add role-based permissions, automation rules, notifications, activity logging, and settings.
+
+Phase 7: Add tests, resolve errors, improve accessibility, and verify the application end to end.
+
+At each phase, maintain a runnable application. Do not replace working features with placeholders while adding new ones.
+
+23. Final Deliverables
+
+Deliver:
+
+A complete, runnable application.
+A polished and consistent user interface.
+All required routes and connected workflows.
+Reusable TypeScript components.
+A documented database schema and required indexes.
+Secure authentication and authorization integration points.
+Real Gemini integration with validated output.
+A usable local demo mode with fictional seed data.
+A sample environment configuration.
+Setup and deployment instructions.
+A README covering architecture, features, configuration, and limitations.
+Tests for core business logic and security-sensitive behavior.
+
+Start by building the actual application, not by returning a long plan or only a design description.
+
+Prioritize the fully functional ticket management workflow first, then complete the remaining features systematically.
+
+If a required integration cannot be configured automatically, implement its integration boundary, provide explicit setup instructions, and keep the rest of the application operational.
+
+The final result should feel like a coherent, professional SaaS product rather than a collection of unrelated demo screens.

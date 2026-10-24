@@ -1,0 +1,6 @@
+{
+  "name": "ResolveAI",
+  "description": "AI-assisted customer support and issue management platform with intelligent ticket triage, reply assistance, and grounded knowledge base.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
